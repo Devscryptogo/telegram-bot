@@ -7,8 +7,10 @@ from telegram.ext import (
     CallbackQueryHandler
 )
 
-import os
 TOKEN = os.getenv("BOT_TOKEN")
+
+if not TOKEN:
+    raise RuntimeError("BOT_TOKEN não encontrado. Defina a variável de ambiente.")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     keyboard = [
@@ -19,8 +21,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    await update.message.reply_text(
-        "🚀 *Bem-vindo ao SpaceCoin Bot*\n\n"
+    await update.effective_message.reply_text(
+        "🚀 *Bem-vindo ao PepePig Bot*\n\n"
         "Clique em um botão abaixo 👇\n\n"
         "⚠️ Nunca enviaremos DM. Cuidado com golpes.",
         reply_markup=reply_markup,
@@ -55,8 +57,5 @@ def main():
     print("🤖 Bot rodando...")
     app.run_polling()
 
-
 if __name__ == "__main__":
     main()
-
-
